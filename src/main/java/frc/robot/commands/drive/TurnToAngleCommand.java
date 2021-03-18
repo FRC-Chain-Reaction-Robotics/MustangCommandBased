@@ -4,13 +4,14 @@ import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.subsystems.Mecanum;
 
-public class TurnToAngleCommand extends PIDCommand {
-    MecanumDrive md;
+public class TurnToAngleCommand extends PIDCommand
+{
+    Mecanum md;
 
     public TurnToAngleCommand(double targetAngleDegrees, Mecanum md) 
     {
         super(new PIDController(0.09, 0.22, 0),
-            dt::getAngle,
+            md::getAngle,
             targetAngleDegrees,
             output -> md.drive(0, 0, output),
             md);

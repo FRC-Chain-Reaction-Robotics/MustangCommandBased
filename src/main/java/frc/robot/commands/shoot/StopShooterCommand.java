@@ -8,11 +8,10 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class StopShooterCommand extends CommandBase
 {
     Shooter shooter;
-    double RPM;
-    public StartShooterCommand(Shooter shooter, double RPM)
+    
+    public StopShooterCommand(Shooter shooter)
     {
         this.shooter = shooter;
-        this.RPM = RPM;
         addRequirements(shooter);
     }
 

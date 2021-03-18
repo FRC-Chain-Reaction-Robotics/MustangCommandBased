@@ -1,14 +1,23 @@
+package frc.robot.subsystems;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import robot.subsystem.Constants;
+import frc.robot.Constants;
 
 
-public class Loader extends SubsystemBase {   //  you have to extend subsystembase in all subsystems btw
-    private TalonSRX LoaderMotor = new TalonSRX(LOADER_MOTOR_ID);
-    public On()
+public class Loader extends SubsystemBase
+{
+    private TalonSRX LoaderMotor = new TalonSRX(Constants.LOADER_MOTOR_ID);
+
+    public void on()
     {
-        LoadeNMotor.set(TalonSRXControlMode,1);
+        LoaderMotor.set(ControlMode.PercentOutput, 1);
     }
-    public off(){
-        LoaderMotor.set(TalonSRXControlMode,0);
+
+    public void off()
+    {
+        LoaderMotor.set(ControlMode.PercentOutput, 0);
     }
 }

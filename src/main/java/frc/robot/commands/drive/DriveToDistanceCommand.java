@@ -5,12 +5,12 @@ import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.subsystems.Mecanum;
 
 public class DriveToDistanceCommand extends PIDCommand {
-    MecanumDrive md;
+    Mecanum md;
 
     public DriveToDistanceCommand(double targetDistanceMeters, Mecanum md) 
     {  
-        super(new PIDContrller(2.5, 0, 0),
-            dt::getDistance,
+        super(new PIDController(2.5, 0, 0),
+            md::getDistance,
             targetDistanceMeters,
             output -> md.drive(0, output, 0),
             md);
