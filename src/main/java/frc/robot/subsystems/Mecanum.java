@@ -5,10 +5,13 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANEncoder;
 import static com.revrobotics.CANSparkMaxLowLevel.MotorType.*;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj2.command.*;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 import frc.robot.Constants;
 
 public class Mecanum extends SubsystemBase
@@ -19,6 +22,13 @@ public class Mecanum extends SubsystemBase
 	private static CANSparkMax rb = new CANSparkMax(Constants.RB_MOTOR_ID, kBrushless);
 	
 	MecanumDrive md = new MecanumDrive(lf, lb, rf, rb);
+
+	CANEncoder m_leftFrontEncoder = lf.getEncoder();
+    CANEncoder m_leftBackEncoder = lb.getEncoder();
+    CANEncoder m_rightFrontEncoder = rf.getEncoder();
+    CANEncoder m_rightBackEncoder = rb.getEncoder();
+
+	Gyro gyro = new ADXRS450_Gyro(kOnboardCS0);
 
 	public void MecanumDrive()
 	{
@@ -38,16 +48,22 @@ public class Mecanum extends SubsystemBase
 
 	public void resetSensors()
 	{
+		gyro.reset();
 
+		m_leftFrontEncoder.reset();
+		m_leftBackEncoder.reset();
+		m_rightFrontEncoder.reset();
+		m_rightBackEncoder.reset();
 	}
 
 	public double getDistance()
 	{
-		return -1;
+		
+		return (m_leftFrontEncoder.getPosition() + m_rightFrontEncoder.getPosition()) / 2.0 ;
 	}
 
 	public double getAngle()
 	{
-		return -1;
+		return gyro.getAngle();
 	}
 }
