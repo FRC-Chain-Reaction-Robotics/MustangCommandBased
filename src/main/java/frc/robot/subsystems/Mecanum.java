@@ -9,6 +9,7 @@ import com.revrobotics.CANEncoder;
 import static com.revrobotics.CANSparkMaxLowLevel.MotorType.*;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj2.command.*;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
@@ -28,7 +29,7 @@ public class Mecanum extends SubsystemBase
     CANEncoder m_rightFrontEncoder = rf.getEncoder();
     CANEncoder m_rightBackEncoder = rb.getEncoder();
 
-	Gyro gyro = new ADXRS450_Gyro(kOnboardCS0);
+	Gyro gyro = new ADXRS450_Gyro(Port.kOnboardCS0);
 
 	public void MecanumDrive()
 	{
@@ -50,16 +51,16 @@ public class Mecanum extends SubsystemBase
 	{
 		gyro.reset();
 
-		m_leftFrontEncoder.reset();
-		m_leftBackEncoder.reset();
-		m_rightFrontEncoder.reset();
-		m_rightBackEncoder.reset();
+		m_leftFrontEncoder.setPosition(0);
+		m_leftBackEncoder.setPosition(0);
+		m_rightFrontEncoder.setPosition(0);
+		m_rightBackEncoder.setPosition(0);
 	}
 
 	public double getDistance()
 	{
-		
-		return (m_leftFrontEncoder.getPosition() + m_rightFrontEncoder.getPosition()) / 2.0 ;
+		return (m_leftFrontEncoder.getPosition() + m_rightFrontEncoder.getPosition()
+				+ m_leftBackEncoder.getPosition() + m_rightBackEncoder.getPosition()) / 4.0 ;
 	}
 
 	public double getAngle()
