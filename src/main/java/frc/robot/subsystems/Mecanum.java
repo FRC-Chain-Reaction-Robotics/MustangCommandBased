@@ -59,8 +59,8 @@ public class Mecanum extends SubsystemBase
 
 	public double getDistance()
 	{
-		return (m_leftFrontEncoder.getPosition() + m_rightFrontEncoder.getPosition()
-				+ m_leftBackEncoder.getPosition() + m_rightBackEncoder.getPosition()) / 4.0 ;
+		return (m_leftFrontEncoder.getPosition() - m_rightFrontEncoder.getPosition() + 
+				m_leftBackEncoder.getPosition() - m_rightBackEncoder.getPosition()) / 4.0;
 	}
 
 	public double getAngle()

@@ -17,7 +17,7 @@ public class TurnToAngleCommand extends PIDCommand
             md);
 
         this.md = md;
-        
+
         getController().setTolerance(0.2);
     }
 
@@ -29,5 +29,5 @@ public class TurnToAngleCommand extends PIDCommand
 	// Returns true when the command should end.
 	public boolean isFinished() {
 		return getController().atSetpoint();
-	}
+    }
 }
